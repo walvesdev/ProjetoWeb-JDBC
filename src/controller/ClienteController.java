@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.ClienteDao;
 import model.Cliente;
@@ -16,34 +17,73 @@ public class ClienteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	Cliente cliente;
+	HttpSession session;
 
 	public ClienteController() {
 
 	}
 
+	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		session = request.getSession();
+	
+		String cpfmascara = request.getParameter("cpf");
+		cpfmascara = cpfmascara.replaceAll("[.-]", "");
+		Long cpf = Long.parseLong(cpfmascara);
+
+		cliente = new Cliente();
+		cliente.setCpf(cpf);
+
+		if ((cpf != null)) {
+			try {
+				Cliente cli = new Cliente();			
+				cli = ClienteDao.pesquisarId(cliente);
+				session.setAttribute("cliente", cli);
+				response.sendRedirect("sistema/clientes/consulta.jsp");				
+			} catch (Exception e) {
+				session.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
+				response.sendRedirect("sistema/clientes/consulta.jsp");
+			}
+		} else {
+				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+				response.sendRedirect("sistema/clientes/consulta.jsp");
+		}
+
 	}
+
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		session = request.getSession();
 
 		String nome = request.getParameter("nome");
 		String cpfmascara = request.getParameter("cpf");
 		String email = request.getParameter("email");
 		cpfmascara = cpfmascara.replaceAll("[.-]", "");
-		long cpf = Long.parseLong(cpfmascara);
-		
+		Long cpf = Long.parseLong(cpfmascara);
+
 		cliente = new Cliente();
 		cliente.setNome(nome);
 		cliente.setCpf(cpf);
 		cliente.setEmail(email);
-		
-		ClienteDao.inserir(cliente);
-		//System.out.println(cliente.getNome() + cliente.getCpf() +  cliente.getEmail() );
 
-		response.sendRedirect("clientes/cadastro.jsp");
+		if ((nome != null) && (cpf != null) && (email != null)) {
+			try {
+				ClienteDao.inserir(cliente);
+				session.setAttribute("mensagem", "Cadastro  Efetuado com Sucesso!");
+				response.sendRedirect("sistema/clientes/cadastro.jsp");
+			} catch (Exception e) {
+				session.setAttribute("mensagem", "Erro ao cadastrar Cliente" + e);
+				response.sendRedirect("sistema/clientes/cadastro.jsp");
+			}
+		} else {
+				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+				response.sendRedirect("sistema/clientes/cadastro.jsp");
+		}
 
 	}
 

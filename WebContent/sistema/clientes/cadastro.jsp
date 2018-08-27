@@ -45,6 +45,7 @@
 							</div>
 						</div>
 						<button type="submit" class="btn btn-danger">Cadastrar</button>
+						${mensagem}
 
 					</form>
 				</div>
