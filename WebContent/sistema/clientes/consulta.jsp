@@ -38,7 +38,7 @@
 
 					<c:choose>
 						<c:when test="${empty(cliente)}">
-							<td colspan="3" align="center">Nenhum Cliente Encontrado</td>
+							<td colspan="3" align="center">Nenhum Cliente Selecionado</td>
 						</c:when>
 						<c:otherwise>
 							

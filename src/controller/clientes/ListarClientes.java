@@ -28,18 +28,25 @@ public class ListarClientes extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		session = request.getSession();
 		List<Cliente> listaClientes = new ArrayList<>();
 		
-		try {
-			
-			session = request.getSession();
-			listaClientes = ClienteDao.pesquisarTodos();
-			request.setAttribute("listaClientes", listaClientes);
-			request.getRequestDispatcher("/sistema/clientes/consultatodos.jsp").forward(request, response);
-			
-		} catch (SQLException e) {
-			System.out.println(e);
+		if(session.getAttribute("usuario") != null) {
+			try {			
+				
+				listaClientes = ClienteDao.pesquisarTodos();
+				request.setAttribute("listaClientes", listaClientes);
+				request.getRequestDispatcher("/sistema/clientes/consultatodos.jsp").forward(request, response);
+				
+			} catch (SQLException e) {
+				System.out.println(e);
+			}
+		}else {
+			session.setAttribute("msg_erro_login", "Usuário não autenticado, identifique-se por favor!");
+			response.sendRedirect(request.getContextPath() + "/login.jsp");
+
 		}
+	
 	}
 
 	

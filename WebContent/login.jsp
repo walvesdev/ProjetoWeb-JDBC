@@ -2,13 +2,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" src="sistema/lib/js/jquery.min.js"></script>
-<script type="text/javascript" src="sistema/lib/js/bootstrap.min.js"></script>
-<link href="lib/css/font-awesome.min.css" rel="stylesheet"
+<link href="${pageContext.request.contextPath}/sistema/lib/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
-<link href="sistema/lib/css/bootstrap.css" rel="stylesheet"
+<link href="${pageContext.request.contextPath}/sistema/lib/css/bootstrap.css" rel="stylesheet"
 	type="text/css">
-<link href="sistema/lib/css/padrao.css" rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath}/sistema/lib/css/padrao.css" rel="stylesheet" type="text/css">
 <title>Sistema WEB</title>
 </head>
 <body>
@@ -52,7 +50,7 @@
 						<button type="submit" class="btn btn-danger">Entrar</button>
 
 					</form>
-					<p class="msg_erro">${msg_erro_login}</p>
+					<p class="msgs">${msg_erro_login}</p>
 				</div>
 			</div>
 		</div>
@@ -68,6 +66,7 @@
 	</footer>
 
 
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/sistema/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/sistema/lib/js/bootstrap.min.js"></script>
 </body>
 </html>

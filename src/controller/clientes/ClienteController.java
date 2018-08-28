@@ -37,27 +37,24 @@ public class ClienteController extends HttpServlet {
 		cliente = new Cliente();
 		cliente.setCpf(cpf);
 
-	
-			if ((cpf != null)) {
-				try {
-					Cliente cli = new Cliente();
+		if ((cpf != null)) {
+			try {
+				Cliente cli = new Cliente();
 
-					cli = ClienteDao.pesquisarId(cliente);
-					session.setAttribute("cliente", cli);
-					response.sendRedirect("sistema/clientes/consulta.jsp");
+				cli = ClienteDao.pesquisarId(cliente);
+				session.setAttribute("cliente", cli);
+				response.sendRedirect("sistema/clientes/consulta.jsp");
 
-				} catch (Exception e) {
-					session.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
-					response.sendRedirect("sistema/clientes/consulta.jsp");
-				}
-			} else {
-				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+			} catch (Exception e) {
+				session.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
 				response.sendRedirect("sistema/clientes/consulta.jsp");
 			}
-
+		} else {
+			session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+			response.sendRedirect("sistema/clientes/consulta.jsp");
 		}
 
-	
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -77,13 +74,19 @@ public class ClienteController extends HttpServlet {
 
 		if ((nome != null) && (cpf != null) && (email != null)) {
 			try {
-				ClienteDao.inserir(cliente);
-				session.setAttribute("mensagem", "Cadastro  Efetuado com Sucesso!");
-				response.sendRedirect("sistema/clientes/cadastro.jsp");
+
+				if (ClienteDao.pesquisarId(cliente) == null) {
+					ClienteDao.inserir(cliente);
+					session.setAttribute("mensagem", "Cadastro  Efetuado com Sucesso!");
+					response.sendRedirect("sistema/clientes/cadastro.jsp");
+				}else {
+					session.setAttribute("mensagem", "Erro ao cadastrar Cliente, CPF Já cadastrado!");
+					response.sendRedirect("sistema/clientes/cadastro.jsp");
+				}
 			} catch (Exception e) {
-				session.setAttribute("mensagem", "Erro ao cadastrar Cliente" + e);
-				response.sendRedirect("sistema/clientes/cadastro.jsp");
+				System.out.println(e);
 			}
+
 		} else {
 			session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
 			response.sendRedirect("sistema/clientes/cadastro.jsp");

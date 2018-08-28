@@ -44,8 +44,8 @@
 									name="email" placeholder="E-mail" required>
 							</div>
 						</div>
-						<button type="submit" class="btn btn-danger">Cadastrar</button>
-						${mensagem}
+						<button type="submit" class="btn btn-danger">Cadastrar</button><br><br>
+						<p class="msgs">${mensagem} </p>
 
 					</form>
 				</div>

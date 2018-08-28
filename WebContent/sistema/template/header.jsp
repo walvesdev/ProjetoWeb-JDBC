@@ -20,7 +20,7 @@
 					<div class="col-md-12 text-center">
 						<h1 class="text-center">Sistema de Gerenciamento de Cursos</h1>
 						<p class="text-right">Usuario: ${usuario.nome}</p>
-						<p class="text-right">Permissãp: ${usuario.grupo}</p>
+						<p class="text-right">Permissão: ${usuario.grupo}</p>
 						<p class="text-right p1">
 							<span class="label label-warning"><a
 								href="/ProjetoWeb/Logout">Sair</a></span>
@@ -99,13 +99,12 @@
 									</ul></li>
 									<li class="dropdown"><a href="#" class="dropdown-toggle"
 									data-toggle="dropdown" role="button" aria-haspopup="true"
-									aria-expanded="false">Admin <span class="caret"></span></a>
+									aria-expanded="false">Configurações<span class="caret"></span></a>
 									<ul class="dropdown-menu">
 										<li><a
-											href="${pageContext.request.contextPath}/sistema/pagamentos/cadastro.jsp">Cadastrar</a></li>
+											href="${pageContext.request.contextPath}/sistema/pagamentos/cadastro.jsp">Usuário do Sistema</a></li>
 										<li><a
-											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
-												Todos</a></li>
+											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Permissões de Acesso</a></li>
 										<li><a
 											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
 												Pagamento Específico</a></li>
