@@ -7,8 +7,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
 <title>Sistema de Gerenciamento de Cursos</title>
-<link href="lib/css/bootstrap.css" rel="stylesheet">
-<link href="lib/css/padrao.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/sistema/lib/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/sistema/lib/css/padrao.css" rel="stylesheet">
 </head>
 <body>
 	<header>
@@ -37,7 +37,7 @@
 							aria-expanded="false">Clientes <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="clientes/cadastro.jsp">Cadastrar</a></li>
-								<li><a href="clientes/consulta.jsp">Consultar Todos</a></li>
+								<li><a href="/ProjetoWeb/ListarClientes">Consultar Todos</a></li>
 								<li><a href="clientes/consulta.jsp">Consultar Cliente
 										Específico</a></li>
 								<li><a href="clientes/alteracao.jsp">Alterar um Cliente</a></li>
@@ -100,7 +100,7 @@
 	</footer>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="lib/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/sistema/lib/js/bootstrap.min.js"></script>
 </body>
 </html>
 

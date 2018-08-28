@@ -23,8 +23,7 @@
 						</div>
 
 					</div>
-					<input type="hidden" name="idformulario" value="1"> <input
-						type="hidden" name="tipoformulario" value="12">
+					<input type="hidden" name="idformulario" value="2"> 
 					<button type="submit" class="btn btn-danger">Consultar</button></br></br></br></br>
 					<table  class="table" style="width: 100%">
 						<tr>

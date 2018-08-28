@@ -1,4 +1,4 @@
-package controller;
+package controller.clientes;
 
 import java.io.IOException;
 
@@ -28,32 +28,43 @@ public class ClienteController extends HttpServlet {
 			throws ServletException, IOException {
 
 		session = request.getSession();
-	
+
 		String cpfmascara = request.getParameter("cpf");
 		cpfmascara = cpfmascara.replaceAll("[.-]", "");
 		Long cpf = Long.parseLong(cpfmascara);
+		int idFormulario = Integer.parseInt(request.getParameter("idformulario"));
 
 		cliente = new Cliente();
 		cliente.setCpf(cpf);
 
-		if ((cpf != null)) {
-			try {
-				Cliente cli = new Cliente();			
-				cli = ClienteDao.pesquisarId(cliente);
-				session.setAttribute("cliente", cli);
-				response.sendRedirect("sistema/clientes/consulta.jsp");				
-			} catch (Exception e) {
-				session.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
-				response.sendRedirect("sistema/clientes/consulta.jsp");
-			}
-		} else {
+		switch (idFormulario) {
+		case 1:
+			
+			break;
+		case 2:
+			if ((cpf != null)) {
+				try {
+					Cliente cli = new Cliente();
+
+					cli = ClienteDao.pesquisarId(cliente);
+					session.setAttribute("cliente", cli);
+					response.sendRedirect("sistema/clientes/consultatodos.jsp");
+
+				} catch (Exception e) {
+					session.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
+					response.sendRedirect("sistema/clientes/consultatodos.jsp");
+				}
+			} else {
 				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
-				response.sendRedirect("sistema/clientes/consulta.jsp");
+				response.sendRedirect("sistema/clientes/consultatodos.jsp");
+			}
+
+			break;
+		default:
+			break;
 		}
 
 	}
-
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -81,8 +92,8 @@ public class ClienteController extends HttpServlet {
 				response.sendRedirect("sistema/clientes/cadastro.jsp");
 			}
 		} else {
-				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
-				response.sendRedirect("sistema/clientes/cadastro.jsp");
+			session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+			response.sendRedirect("sistema/clientes/cadastro.jsp");
 		}
 
 	}
