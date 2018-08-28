@@ -13,13 +13,14 @@
 <link href="${pageContext.request.contextPath}/sistema/lib/css/padrao.css" rel="stylesheet">
 </head>
 <body>
-	<header>
+<header>
 		<div class="section section-primary text-justify">
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-md-12 text-center">
 						<h1 class="text-center">Sistema de Gerenciamento de Cursos</h1>
 						<p class="text-right">Usuario: ${usuario.nome}</p>
+						<p class="text-right">Permissãp: ${usuario.grupo}</p>
 						<p class="text-right p1">
 							<span class="label label-warning"><a
 								href="/ProjetoWeb/Logout">Sair</a></span>
@@ -28,53 +29,172 @@
 				</div>
 			</div>
 		</div>
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#"></a>
-					<ul class="nav navbar-nav navbar-left">
-						<li><a href="../index.jsp">Início</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">Clientes <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="../clientes/cadastro.jsp">Cadastrar</a></li>
-								<li><a href="/ProjetoWeb/ListarClientes">Consultar Todos</a></li>
-								<li><a href="../clientes/consulta.jsp">Consultar Cliente
-										Específico</a></li>
-								<li><a href="../clientes/alteracao.jsp">Alterar um Cliente</a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="../clientes/exclusao.jsp">Excluir um Cliente</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">Cursos <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="../cursos/cadastro.jsp">Cadastrar</a></li>
-								<li><a href="../cursos/consulta.jsp">Consultar Todos</a></li>
-								<li><a href="../cursos/consulta.jsp">Consultar Curso Específico</a></li>
-								<li><a href="../cursos/alteracao.jsp">Alterar um Curso</a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="../cursos/exclusao.jsp">Excluir um Curso</a></li>
-							</ul></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-haspopup="true"
-							aria-expanded="false">Pagamentos <span class="caret"></span></a>
-							<ul class="dropdown-menu">
-								<li><a href="../pagamentos/cadastro.jsp">Cadastrar</a></li>
-								<li><a href="../pagamentos/consulta.jsp">Consultar Todos</a></li>
-								<li><a href="../pagamentos/consulta.jsp">Consultar Pagamento Específico</a></li>
-								<li><a href="../pagamentos/alteracao.jsp">Alterar um Pagamento</a></li>
-								<li role="separator" class="divider"></li>
-								<li><a href="../pagamentos/exclusao.jsp">Excluir um Pagamento</a></li>
-							</ul></li>
+		<c:choose>
+			<c:when test="${usuario.grupo == 'ADMINISTRADOR'}">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#"></a>
+							<ul class="nav navbar-nav navbar-left">
+								<li><a
+									href="${pageContext.request.contextPath}/sistema/index.jsp">Início</a></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false">Clientes <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/cadastro.jsp">Cadastrar</a></li>
+										<li><a href="/ProjetoWeb/ListarClientes">Consultar
+												Todos</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/consulta.jsp">Consultar
+												Cliente Específico</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/alteracao.jsp">Alterar
+												um Cliente</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/exclusao.jsp">Excluir
+												um Cliente</a></li>
+									</ul></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false">Cursos <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/cadastro.jsp">Cadastrar</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/consulta.jsp">Consultar
+												Todos</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/consulta.jsp">Consultar
+												Curso Específico</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/alteracao.jsp">Alterar
+												um Curso</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/exclusao.jsp">Excluir
+												um Curso</a></li>
+									</ul></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false">Pagamentos <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/cadastro.jsp">Cadastrar</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
+												Todos</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
+												Pagamento Específico</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/alteracao.jsp">Alterar
+												um Pagamento</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentoss/exclusao.jsp">Excluir
+												um Pagamento</a></li>
+									</ul></li>
+									<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false">Admin <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/cadastro.jsp">Cadastrar</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
+												Todos</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
+												Pagamento Específico</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/alteracao.jsp">Alterar
+												um Pagamento</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentoss/exclusao.jsp">Excluir
+												um Pagamento</a></li>
+									</ul></li>
+							</ul>
+						</div>
+					</div>
 
-					</ul>
-
-
-				</div>
-			</div>
-
-		</nav>
+				</nav>
+			</c:when>
+			<c:otherwise>
+			<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<a class="navbar-brand" href="#"></a>
+							<ul class="nav navbar-nav navbar-left">
+								<li><a
+									href="${pageContext.request.contextPath}/sistema/index.jsp">Início</a></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false">Clientes <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/cadastro.jsp">Cadastrar</a></li>
+										<li><a href="/ProjetoWeb/ListarClientes">Consultar
+												Todos</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/consulta.jsp">Consultar
+												Cliente Específico</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/alteracao.jsp">Alterar
+												um Cliente</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/clientes/exclusao.jsp">Excluir
+												um Cliente</a></li>
+									</ul></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false">Cursos <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/cadastro.jsp">Cadastrar</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/consulta.jsp">Consultar
+												Todos</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/consulta.jsp">Consultar
+												Curso Específico</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/alteracao.jsp">Alterar
+												um Curso</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/cursos/exclusao.jsp">Excluir
+												um Curso</a></li>
+									</ul></li>
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+									data-toggle="dropdown" role="button" aria-haspopup="true"
+									aria-expanded="false">Pagamentos <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/cadastro.jsp">Cadastrar</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
+												Todos</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/consulta.jsp">Consultar
+												Pagamento Específico</a></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentos/alteracao.jsp">Alterar
+												um Pagamento</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a
+											href="${pageContext.request.contextPath}/sistema/pagamentoss/exclusao.jsp">Excluir
+												um Pagamento</a></li>
+									</ul></li>
+							</ul>
+						</div>
+					</div>
+				</nav>						
+			</c:otherwise>
+		</c:choose>
 
 	</header>

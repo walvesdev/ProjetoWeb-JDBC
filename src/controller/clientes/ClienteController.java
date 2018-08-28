@@ -37,34 +37,27 @@ public class ClienteController extends HttpServlet {
 		cliente = new Cliente();
 		cliente.setCpf(cpf);
 
-		switch (idFormulario) {
-		case 1:
-			
-			break;
-		case 2:
+	
 			if ((cpf != null)) {
 				try {
 					Cliente cli = new Cliente();
 
 					cli = ClienteDao.pesquisarId(cliente);
 					session.setAttribute("cliente", cli);
-					response.sendRedirect("sistema/clientes/consultatodos.jsp");
+					response.sendRedirect("sistema/clientes/consulta.jsp");
 
 				} catch (Exception e) {
 					session.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
-					response.sendRedirect("sistema/clientes/consultatodos.jsp");
+					response.sendRedirect("sistema/clientes/consulta.jsp");
 				}
 			} else {
 				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
-				response.sendRedirect("sistema/clientes/consultatodos.jsp");
+				response.sendRedirect("sistema/clientes/consulta.jsp");
 			}
 
-			break;
-		default:
-			break;
 		}
 
-	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

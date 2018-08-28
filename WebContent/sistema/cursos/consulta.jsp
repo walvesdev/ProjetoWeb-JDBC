@@ -1,4 +1,4 @@
-<jsp:include page="/sistema/template/header.jsp" />
+${pageContext.request.contextPath}/sistema/<jsp:include page="/sistema/template/header.jsp" />
 	<div class="section">
 		<div class="container">
 			<div class="row">

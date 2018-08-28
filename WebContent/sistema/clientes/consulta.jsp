@@ -1,3 +1,7 @@
+<%@page import="model.Cliente"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/sistema/template/header.jsp" />
 <div class="section">
 	<div class="container">
@@ -24,21 +28,40 @@
 
 					</div>
 					<input type="hidden" name="idformulario" value="2"> 
-					<button type="submit" class="btn btn-danger">Consultar</button></br></br></br></br>
-					<table  class="table" style="width: 100%">
-						<tr>
-							<th>ID</th>
-							<th>NOME</th>
-							<th>CPF</th>
-							<th>EMAIL</th>
-						</tr>
-						<tr>
-							<td>${cliente.id}</td>
-							<td>${cliente.nome}</td>
-							<td>${cliente.cpf}</td>
-							<td>${cliente.email}</td>
-						</tr>
-					</table>
+					<button type="submit" class="btn btn-danger">Consultar</button><br><br><br><br>
+					<table width="100%" border="1">
+					<tr>
+						<td align="center"><strong>Nome</strong></td>
+						<td align="center"><strong>CPF</strong></td>
+						<td align="center"><strong>EMAIL</strong></td>
+					</tr>
+
+					<c:choose>
+						<c:when test="${empty(cliente)}">
+							<td colspan="3" align="center">Nenhum Cliente Encontrado</td>
+						</c:when>
+						<c:otherwise>
+							
+								<tr>
+									<c:url var="editarContatoUrl" value="/Editar">
+										<c:param name="id">${cliente.id}</c:param>
+									</c:url>
+
+									<c:url var="excluirContatoUrl" value="/Excluir">
+										<c:param name="id">${cliente.id}</c:param>
+									</c:url>
+
+									
+									<td align="center">${cliente.nome}</td>
+									<td align="center">${cliente.cpf}</td>
+									<td align="center">${cliente.email}</td>
+									<td align="center"><A href="${excluirContatoUrl}">Excluir</A></td>
+								</tr>
+							
+						</c:otherwise>
+					</c:choose>
+
+				</table>
 				</form>
 			</div>
 		</div>

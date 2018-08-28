@@ -47,7 +47,7 @@ public class LoginController extends HttpServlet {
 				Usuario usuario = new Usuario();
 				usuario.setId(rs.getInt("id"));
 				usuario.setNome(rs.getString("nome"));
-				usuario.setGrupo("grupo");
+				usuario.setGrupo(rs.getString("grupo"));
 				
 				session.setAttribute("usuario", usuario);
 				
