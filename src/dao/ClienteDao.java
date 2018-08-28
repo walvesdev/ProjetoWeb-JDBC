@@ -79,4 +79,19 @@ public class ClienteDao {
 		return listaCliente;
 
 	}
-}
+
+	public static void excluir(Cliente cliente) throws SQLException {
+		String consulta = "delete * from clientes where cpf = ?;";
+
+		try (Connection connection = ConectarBD.Conectar();
+				PreparedStatement stmt = connection.prepareStatement(consulta);) {
+
+			stmt.setLong(1, cliente.getCpf());
+			stmt.execute();
+
+			
+			}
+		}
+
+	}
+

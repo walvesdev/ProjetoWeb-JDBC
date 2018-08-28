@@ -31,9 +31,7 @@ public class LoginFilter implements Filter {
 		
 		boolean isStaticResource =  request.getRequestURI().contains(request.getContextPath() + "/sistema/lib/");
 		boolean isLoginPage =  request.getRequestURI().contains("login.jsp");
-		boolean isJs =  request.getRequestURI().contains(".js");
-		boolean isCss =  request.getRequestURI().contains(".css");
-	
+		
 		
 		if ((session.getAttribute("login") == "true") || isStaticResource || isLoginPage ){
 

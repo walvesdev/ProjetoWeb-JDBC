@@ -44,7 +44,7 @@
 									<ul class="dropdown-menu">
 										<li><a
 											href="${pageContext.request.contextPath}/sistema/clientes/cadastro.jsp">Cadastrar</a></li>
-										<li><a href="/ProjetoWeb/ListarClientes">Consultar
+										<li><a href="${pageContext.request.contextPath}/sistema/clientes/consultatodos.jsp">Consultar
 												Todos</a></li>
 										<li><a
 											href="${pageContext.request.contextPath}/sistema/clientes/consulta.jsp">Consultar

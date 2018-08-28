@@ -1,6 +1,9 @@
 package controller.clientes;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,42 +19,58 @@ import model.Cliente;
 public class ClienteController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	Cliente cliente;
-	HttpSession session;
+	Cliente cliente = null;
+	HttpSession session = null;
+	String nome = null;
+	String email = null;
+	String cpfmascara = null;
+	Long cpf = null;
+	String action = null;
 
 	public ClienteController() {
 
 	}
 
-	@SuppressWarnings("unused")
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		session = request.getSession();
+		action = request.getParameter("action");
 
-		String cpfmascara = request.getParameter("cpf");
-		cpfmascara = cpfmascara.replaceAll("[.-]", "");
-		Long cpf = Long.parseLong(cpfmascara);
-		int idFormulario = Integer.parseInt(request.getParameter("idformulario"));
+		switch (action) {
 
-		cliente = new Cliente();
-		cliente.setCpf(cpf);
+		// =============================================================== DELETE ===============================================================================
 
-		if ((cpf != null)) {
-			try {
-				Cliente cli = new Cliente();
+		case "delete":
 
-				cli = ClienteDao.pesquisarId(cliente);
-				session.setAttribute("cliente", cli);
-				response.sendRedirect("sistema/clientes/consulta.jsp");
+			cpfmascara = request.getParameter("cpf");
+			cpfmascara = cpfmascara.replaceAll("[.-]", "");
+			cpf = Long.parseLong(cpfmascara);
 
-			} catch (Exception e) {
-				session.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
-				response.sendRedirect("sistema/clientes/consulta.jsp");
+			cliente = new Cliente();
+			cliente.setCpf(cpf);
+
+			if ((cpf != null)) {
+				try {
+
+					if (ClienteDao.pesquisarId(cliente) != null) {
+						ClienteDao.excluir(cliente);
+						session.setAttribute("mensagem", "Cliente excluido com sucesso!");
+						response.sendRedirect("sistema/clientes/exclusao.jsp");
+					} else {
+						session.setAttribute("mensagem", "Erro ao cadastrar Cliente, CPF não encontrado!");
+						response.sendRedirect("sistema/clientes/exclusao.jsp");
+					}
+
+				} catch (SQLException e) {
+					System.out.println(e);
+				}
+			} else {
+				session.setAttribute("mensagem", "CPF precisa ser preenchido corretamente!");
+				response.sendRedirect("sistema/clientes/exclusao.jsp");
+
 			}
-		} else {
-			session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
-			response.sendRedirect("sistema/clientes/consulta.jsp");
+
+			break;
 		}
 
 	}
@@ -59,49 +78,141 @@ public class ClienteController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		session = request.getSession();
+		action = request.getParameter("action");
 
-		String nome = request.getParameter("nome");
-		String cpfmascara = request.getParameter("cpf");
-		String email = request.getParameter("email");
-		cpfmascara = cpfmascara.replaceAll("[.-]", "");
-		Long cpf = Long.parseLong(cpfmascara);
+//==============================================================================================================================================		
 
-		cliente = new Cliente();
-		cliente.setNome(nome);
-		cliente.setCpf(cpf);
-		cliente.setEmail(email);
+		switch (action) {
 
-		if ((nome != null) && (cpf != null) && (email != null)) {
+//=============================================================  INSERIR   =================================================================================			
+
+		case "inserir":
+
+			session = request.getSession();
+			nome = request.getParameter("nome");
+			email = request.getParameter("email");
+
+			cpfmascara = request.getParameter("cpf");
+			cpfmascara = cpfmascara.replaceAll("[.-]", "");
+			cpf = Long.parseLong(cpfmascara);
+
+			cliente = new Cliente();
+			cliente.setNome(nome);
+			cliente.setCpf(cpf);
+			cliente.setEmail(email);
+
+			if ((nome != null) && (cpf != null) && (email != null)) {
+				try {
+
+					if (ClienteDao.pesquisarId(cliente) == null) {
+						ClienteDao.inserir(cliente);
+						session.setAttribute("mensagem", "Cadastro  Efetuado com Sucesso!");
+						response.sendRedirect("sistema/clientes/cadastro.jsp");
+					} else {
+						session.setAttribute("mensagem", "Erro ao cadastrar Cliente, CPF Já cadastrado!");
+						response.sendRedirect("sistema/clientes/cadastro.jsp");
+					}
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+
+			} else {
+				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+				response.sendRedirect("sistema/clientes/cadastro.jsp");
+			}
+
+			break;
+
+//===============================================================   PESQUISA   ===============================================================================			
+
+		case "consulta":
+
+			cpfmascara = request.getParameter("cpf");
+			cpfmascara = cpfmascara.replaceAll("[.-]", "");
+			cpf = Long.parseLong(cpfmascara);
+
+			cliente = new Cliente();
+			cliente.setCpf(cpf);
+
+			if ((cpf != null)) {
+				try {
+					Cliente cli = new Cliente();
+
+					cli = ClienteDao.pesquisarId(cliente);
+					request.setAttribute("cliente", cli);
+					request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
+
+				} catch (Exception e) {
+					request.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
+					request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
+
+				}
+			} else {
+				request.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+				request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
+
+			}
+
+			break;
+
+//===============================================================  DELETE  ===============================================================================			
+
+		case "delete":
+
+			cpfmascara = request.getParameter("cpf");
+			cpfmascara = cpfmascara.replaceAll("[.-]", "");
+			cpf = Long.parseLong(cpfmascara);
+
+			cliente = new Cliente();
+			cliente.setCpf(cpf);
+
+			if ((cpf != null)) {
+				try {
+
+					if (ClienteDao.pesquisarId(cliente) != null) {
+						ClienteDao.excluir(cliente);
+						session.setAttribute("mensagem", "Cliente excluido com sucesso!");
+						response.sendRedirect("sistema/clientes/exclusao.jsp");
+					} else {
+						session.setAttribute("mensagem", "Erro ao cadastrar Cliente, CPF não encontrado!");
+						response.sendRedirect("sistema/clientes/exclusao.jsp");
+					}
+
+				} catch (SQLException e) {
+					System.out.println(e);
+				}
+			} else {
+				session.setAttribute("mensagem", "CPF precisa ser preenchido corretamente!");
+				response.sendRedirect("sistema/clientes/exclusao.jsp");
+
+			}
+
+			break;
+
+//===========================================================  CONSULTA TODOS  ==================================================================================			
+
+		case "consultartodos":
+
 			try {
 
-				if (ClienteDao.pesquisarId(cliente) == null) {
-					ClienteDao.inserir(cliente);
-					session.setAttribute("mensagem", "Cadastro  Efetuado com Sucesso!");
-					response.sendRedirect("sistema/clientes/cadastro.jsp");
-				}else {
-					session.setAttribute("mensagem", "Erro ao cadastrar Cliente, CPF Já cadastrado!");
-					response.sendRedirect("sistema/clientes/cadastro.jsp");
-				}
-			} catch (Exception e) {
+				List<Cliente> listaClientes = new ArrayList<>();
+
+				listaClientes = ClienteDao.pesquisarTodos();
+				request.setAttribute("listaClientes", listaClientes);
+				request.getRequestDispatcher("/sistema/clientes/consultatodos.jsp").forward(request, response);
+
+			} catch (SQLException e) {
+
 				System.out.println(e);
 			}
 
-		} else {
-			session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
-			response.sendRedirect("sistema/clientes/cadastro.jsp");
+			break;
+
+//===========================================================  ++++++++++++++++ ==================================================================================
+
+		default:
+			break;
 		}
 
 	}
-
-	protected void doPut(HttpServletRequest rerequestq, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
 }

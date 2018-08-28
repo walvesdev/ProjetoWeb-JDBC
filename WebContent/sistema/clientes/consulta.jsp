@@ -13,7 +13,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
-				<form class="form-horizontal" role="form" method="get"
+				<form class="form-horizontal" role="form" method="post"
 					action="/ProjetoWeb/ClienteController">
 					<div class="form-group">
 						<div class="col-sm-2">
@@ -27,42 +27,40 @@
 						</div>
 
 					</div>
-					<input type="hidden" name="idformulario" value="2"> 
-					<button type="submit" class="btn btn-danger">Consultar</button><br><br><br><br>
+					<input type="hidden" name="action" value="consulta">
+					<button type="submit" class="btn btn-danger">Consultar</button>
+					<br>
+					<br>
+					<br>
+					<br>
 					<table width="100%" border="1">
-					<tr>
-						<td align="center"><strong>Nome</strong></td>
-						<td align="center"><strong>CPF</strong></td>
-						<td align="center"><strong>EMAIL</strong></td>
-					</tr>
+						<tr>
+							<td align="center"><strong>Nome</strong></td>
+							<td align="center"><strong>CPF</strong></td>
+							<td align="center"><strong>EMAIL</strong></td>
+						</tr>
 
-					<c:choose>
-						<c:when test="${empty(cliente)}">
-							<td colspan="3" align="center">Nenhum Cliente Selecionado</td>
-						</c:when>
-						<c:otherwise>
-							
+						<c:choose>
+							<c:when test="${empty(cliente)}">
+								<td colspan="3" align="center">Nenhum Cliente Selecionado</td>
+							</c:when>
+							<c:otherwise>
+
 								<tr>
-									<c:url var="editarContatoUrl" value="/Editar">
-										<c:param name="id">${cliente.id}</c:param>
-									</c:url>
-
-									<c:url var="excluirContatoUrl" value="/Excluir">
-										<c:param name="id">${cliente.id}</c:param>
-									</c:url>
-
 									
+
+
 									<td align="center">${cliente.nome}</td>
 									<td align="center">${cliente.cpf}</td>
 									<td align="center">${cliente.email}</td>
-									<td align="center"><A href="${excluirContatoUrl}">Excluir</A></td>
 								</tr>
-							
-						</c:otherwise>
-					</c:choose>
 
-				</table>
+							</c:otherwise>
+						</c:choose>
+
+					</table>
 				</form>
+				<p class="msgs">${mensagem} </p>
 			</div>
 		</div>
 	</div>
