@@ -69,13 +69,5 @@
 			</div>
 		</div>
 	</div>
-	<div class="section">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12 text-center corrigir">
-					<a class="btn btn-default" href="javascript:window.history.go(-1)">Voltar</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 	<jsp:include page="/sistema/template/footer.jsp" />

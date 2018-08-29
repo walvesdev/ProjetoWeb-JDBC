@@ -7,8 +7,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h3 class="tt_menu">&gt;&gt; CURSOS - CONSULTAR CURSO
-					&lt;&lt;</h3>
+				<h3 class="tt_menu">&gt;&gt; CURSOS - CONSULTAR CURSO &lt;&lt;</h3>
 			</div>
 		</div>
 		<div class="row">
@@ -21,12 +20,25 @@
 								CURSO:</label>
 						</div>
 						<div class="col-sm-10">
-							<input type="number" name="codcurso" class="form-control" id="inputEmail3" placeholder="CURSO" required>
+							<input type="number" name="codcurso" class="form-control"
+								id="inputEmail3" placeholder="CURSO" required>
 						</div>
 					</div>
 					<input type="hidden" name="action" value="consulta">
 					<button type="submit" class="btn btn-danger">Consultar</button>
-					<br> <br> <br> <br>
+					<br> <br>
+					<c:choose>
+						<c:when test="${erro != null}">
+							<div class="alert alert-danger" role="alert">${erro}</div>
+						</c:when>
+						<c:when test="${sucesso != null}">
+							<div class="alert alert-success" role="alert">${sucesso}</div>
+						</c:when>
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
+					<br> <br>
 					<table width="100%" border="1">
 						<tr>
 							<td align="center"><strong>CÓDIGO</strong></td>
@@ -43,7 +55,7 @@
 
 								<tr>
 									<c:url var="editarCursoUrl"
-										value="/CursoController?action=clienteAlterar">
+										value="/CursosController?action=CursoAlterar">
 										<c:param name="codcurso">${curso.codCurso}</c:param>
 										<c:param name="nome">${curso.nome}</c:param>
 										<c:param name="site">${curso.site}</c:param>
@@ -51,7 +63,7 @@
 									</c:url>
 
 									<c:url var="excluirCursoUrl"
-										value="/CursoController?action=clienteDeletar">
+										value="/CursosController?action=CursoDeletar">
 										<c:param name="codcurso">${curso.codCurso}</c:param>
 									</c:url>
 
@@ -59,7 +71,7 @@
 									<td align="center">${curso.codCurso}</td>
 									<td align="center">${curso.nome}</td>
 									<td align="center">${curso.site}</td>
-									<td align="center">${curso.valor}</td>
+									<td align="center">R$ ${curso.valor}</td>
 									<td align="center"><A href="${excluirCursoUrl}">Excluir</A></td>
 									<td align="center"><A href="${editarCursoUrl}">Editar</A></td>
 								</tr>
@@ -70,17 +82,7 @@
 					</table>
 
 				</form>
-				<c:choose>
-					<c:when test="${erro != null}">
-						<div class="alert alert-danger" role="alert">${erro}</div>
-					</c:when>
-					<c:when test="${sucesso != null}">
-						<div class="alert alert-success" role="alert">${sucesso}</div>
-					</c:when>
-					<c:otherwise>
 
-					</c:otherwise>
-				</c:choose>
 			</div>
 		</div>
 	</div>

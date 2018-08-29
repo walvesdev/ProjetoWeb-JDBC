@@ -25,7 +25,7 @@ public class CursosController extends HttpServlet {
 	String site = null;
 	int codCurso = 0;
 	double valor = 0;
-	
+
 	String action = null;
 
 	public CursosController() {
@@ -34,7 +34,7 @@ public class CursosController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		action = request.getParameter("action");
 
 		switch (action) {
@@ -68,9 +68,12 @@ public class CursosController extends HttpServlet {
 			valor = Double.parseDouble(request.getParameter("valor"));
 
 			curso = new Curso();
-			
+			curso.setNome(nome);
+			curso.setCodCurso(codCurso);
+			curso.setSite(site);
+			curso.setValor(valor);
 
-			request.setAttribute("Curso", curso);
+			request.setAttribute("curso", curso);
 			request.getRequestDispatcher("/sistema/cursos/alteracao.jsp").forward(request, response);
 
 			break;
@@ -79,15 +82,12 @@ public class CursosController extends HttpServlet {
 
 		case "CursoDeletar":
 
-			nome = request.getParameter("nome");
-			site = request.getParameter("site");
 			codCurso = Integer.parseInt(request.getParameter("codcurso"));
-			valor = Double.parseDouble(request.getParameter("valor"));
 
 			curso = new Curso();
+			curso.setCodCurso(codCurso);
 			
-
-			request.setAttribute("Curso", curso);
+			request.setAttribute("curso", curso);
 			request.getRequestDispatcher("/sistema/cursos/exclusao.jsp").forward(request, response);
 
 			break;
@@ -100,7 +100,9 @@ public class CursosController extends HttpServlet {
 
 // =========================================================================================================================================================
 
+		action = request.getParameter("action");
 
+		codCurso = Integer.parseInt(request.getParameter("codcurso"));
 
 // =========================================================================================================================================================
 
@@ -119,8 +121,7 @@ public class CursosController extends HttpServlet {
 			curso.setNome(nome);
 			curso.setCodCurso(codCurso);
 			curso.setSite(site);
-			curso.setValor(valor);		
-			
+			curso.setValor(valor);
 
 			if ((nome != null) && (codCurso != 0) && (valor != 0)) {
 				try {
@@ -149,14 +150,14 @@ public class CursosController extends HttpServlet {
 		case "consulta":
 
 			codCurso = Integer.parseInt(request.getParameter("codcurso"));
-			
+
 			curso = new Curso();
 			curso.setCodCurso(codCurso);
 
 			if (codCurso != 0) {
 				try {
 					if (CursoDao.pesquisarId(curso) != null) {
-						
+
 						Curso curso1 = new Curso();
 
 						curso1 = CursoDao.pesquisarId(curso);
@@ -187,10 +188,8 @@ public class CursosController extends HttpServlet {
 
 			codCurso = Integer.parseInt(request.getParameter("codcurso"));
 
-		
 			curso = new Curso();
 			curso.setCodCurso(codCurso);
-
 
 			if ((codCurso != 0)) {
 				try {
@@ -238,13 +237,19 @@ public class CursosController extends HttpServlet {
 
 		case "alterar":
 
+			nome = request.getParameter("nome");
+			site = request.getParameter("site");
 			codCurso = Integer.parseInt(request.getParameter("codcurso"));
-
+			valor = Double.parseDouble(request.getParameter("valor"));
+			
 			curso = new Curso();
+			curso.setNome(nome);
 			curso.setCodCurso(codCurso);
+			curso.setSite(site);
+			curso.setValor(valor);
 
 
-			if ((codCurso != 0 ) && (nome != null) && (site != null)) {
+			if ((codCurso != 0) && (nome != null) && (site != null)) {
 				try {
 
 					if (CursoDao.pesquisarId(curso) != null) {

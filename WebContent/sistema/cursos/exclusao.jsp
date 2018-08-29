@@ -12,7 +12,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<form class="form-horizontal" role="form" method="post"
-					action="/ProjetoWeb/Controlador">
+					action="${pageContext.request.contextPath}/CursosController">
 					<div class="form-group">
 						<div class="col-sm-3">
 							<label for="inputCPF" class="control-label">Informar o
@@ -20,7 +20,7 @@
 						</div>
 						<div class="col-sm-9">
 							<input type="number" name="codcurso" class="form-control"
-								id="inputCPF" required>
+								id="inputCPF" value="${curso.codCurso}" required>
 						</div>
 					</div>
 					<input type="hidden" name="action" value="delete">
