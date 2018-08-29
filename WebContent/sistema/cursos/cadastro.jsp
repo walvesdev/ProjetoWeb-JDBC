@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/sistema/template/header.jsp" />
 	<div class="section">
 		<div class="container">
@@ -43,13 +46,24 @@
 								<label for="inputSITE" class="control-label">SITE:</label>
 							</div>
 							<div class="col-sm-10">
-								<input type="url" name="site" class="form-control" id="inputSITE"
+								<input type="text" name="site" class="form-control" id="inputSITE"
 									placeholder="Site" required>
 							</div>
 						</div>
-						<input type="hidden" name="idformulario" value="2">
-						<input type="hidden" name="tipoformulario" value="23">
-						<button type="submit" class="btn btn-danger">Cadastrar</button>
+						<input type="hidden" name="action" value="inserir">
+						<button type="submit" class="btn btn-danger">Cadastrar</button><br><br>
+						<c:choose>
+						<c:when test="${erro != null}">
+							<div class="alert alert-danger" role="alert">${erro}</div>
+						</c:when>
+						<c:when test="${sucesso != null}">
+							<div class="alert alert-success" role="alert">${sucesso}</div>
+						</c:when>
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
+
 					</form>
 				</div>
 			</div>

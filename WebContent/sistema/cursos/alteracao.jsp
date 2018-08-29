@@ -1,3 +1,8 @@
+<%@page import="model.Curso"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<jsp:include page="/sistema/template/header.jsp" />
 <jsp:include page="/sistema/template/header.jsp" />
     <div class="section">
       <div class="container">
@@ -14,7 +19,7 @@
                   <label for="inputCURSO" class="control-label">Informar o CURSO:</label>
                 </div>
                 <div class="col-sm-10">
-                  <input type="number" name="cdcurso" class="form-control" id="inputCURSO" placeholder="Curso" required>
+                  <input type="number" name="codcurso" class="form-control" id="inputCURSO" placeholder="Curso" required>
                 </div>
               </div>
               <div class="form-group">
@@ -41,10 +46,21 @@
                   <input type="url" name="site" class="form-control" id="inputSITE" placeholder="Site" required>
                 </div>
               </div>
-              		<input type="hidden" name="idformulario" value="2">
-						<input type="hidden" name="tipoformulario" value="24">
-                  <button type="submit" class="btn btn-danger">Alterar</button>
-            </form>
+              		<input type="hidden" name="action" value="alterar">
+					<button type="submit" class="btn btn-danger">Alterar</button>
+				</form>
+				<br>
+				<c:choose>
+					<c:when test="${erro != null}">
+						<div class="alert alert-danger" role="alert">${erro}</div>
+					</c:when>
+					<c:when test="${sucesso != null}">
+						<div class="alert alert-success" role="alert">${sucesso}</div>
+					</c:when>
+					<c:otherwise>
+
+					</c:otherwise>
+				</c:choose>
           </div>
         </div>
       </div>

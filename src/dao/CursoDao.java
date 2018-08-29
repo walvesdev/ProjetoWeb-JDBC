@@ -36,11 +36,11 @@ public class CursoDao {
 	public static Curso pesquisarId(Curso codCurso) throws SQLException {
 
 		Curso curso = null;
-		String consulta = "select * from cursos where codCurso = ?";
+		String consulta = "select * from cursos where codcurso = ?";
 
 		try (Connection connection = ConectarBD.Conectar();
 				PreparedStatement stmt = connection.prepareStatement(consulta);) {
-			stmt.setLong(1, codCurso.getCodCurso());
+			stmt.setInt(1, codCurso.getCodCurso());
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {

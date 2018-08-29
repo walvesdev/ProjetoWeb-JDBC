@@ -64,7 +64,7 @@ public class CursosController extends HttpServlet {
 
 			nome = request.getParameter("nome");
 			site = request.getParameter("site");
-			codCurso = Integer.parseInt(request.getParameter("codCurso"));
+			codCurso = Integer.parseInt(request.getParameter("codcurso"));
 			valor = Double.parseDouble(request.getParameter("valor"));
 
 			curso = new Curso();
@@ -81,7 +81,7 @@ public class CursosController extends HttpServlet {
 
 			nome = request.getParameter("nome");
 			site = request.getParameter("site");
-			codCurso = Integer.parseInt(request.getParameter("codCurso"));
+			codCurso = Integer.parseInt(request.getParameter("codcurso"));
 			valor = Double.parseDouble(request.getParameter("valor"));
 
 			curso = new Curso();
@@ -102,7 +102,7 @@ public class CursosController extends HttpServlet {
 
 		nome = request.getParameter("nome");
 		site = request.getParameter("site");
-		codCurso = Integer.parseInt(request.getParameter("codCurso"));
+		codCurso = Integer.parseInt(request.getParameter("codcurso"));
 		valor = Double.parseDouble(request.getParameter("valor"));
 		
 		session = request.getSession();
@@ -117,6 +117,12 @@ public class CursosController extends HttpServlet {
 
 		case "inserir":
 
+			nome = request.getParameter("nome");
+			site = request.getParameter("site");
+			codCurso = Integer.parseInt(request.getParameter("codcurso"));
+			valor = Double.parseDouble(request.getParameter("valor"));
+
+			curso = new Curso();
 			curso.setNome(nome);
 			
 
@@ -146,8 +152,10 @@ public class CursosController extends HttpServlet {
 
 		case "consulta":
 
-
+			codCurso = Integer.parseInt(request.getParameter("codcurso"));
+			
 			curso = new Curso();
+			curso.setCodCurso(codCurso);
 
 			if (codCurso != 0) {
 				try {
@@ -155,8 +163,8 @@ public class CursosController extends HttpServlet {
 						Curso curso1 = new Curso();
 
 						curso1 = CursoDao.pesquisarId(curso);
-						request.setAttribute("Curso", curso1);
-						request.getRequestDispatcher("/sistema/Cursos/consulta.jsp").forward(request, response);
+						request.setAttribute("curso", curso1);
+						request.getRequestDispatcher("/sistema/cursos/consulta.jsp").forward(request, response);
 
 					} else {
 						request.setAttribute("erro", "Erro ao buscar Curso, Codigo do curso não encontrado");
@@ -189,7 +197,7 @@ public class CursosController extends HttpServlet {
 					if (CursoDao.pesquisarId(curso) != null) {
 						CursoDao.excluir(curso);
 						request.setAttribute("sucesso", "Curso excluido com sucesso!");
-						request.getRequestDispatcher("/sistema/Cursos/exclusao.jsp").forward(request, response);
+						request.getRequestDispatcher("/sistema/cursos/exclusao.jsp").forward(request, response);
 
 					} else {
 						request.setAttribute("erro", "Erro ao excluir Curso, Codigo do curso não encontrado!");

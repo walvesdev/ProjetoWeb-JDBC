@@ -64,7 +64,7 @@
 										<li><a
 											href="${pageContext.request.contextPath}/sistema/cursos/cadastro.jsp">Cadastrar</a></li>
 										<li><a
-											href="${pageContext.request.contextPath}/sistema/cursos/consulta.jsp">Consultar
+											href="${pageContext.request.contextPath}/CursosController?action=consultartodos">Consultar
 												Todos</a></li>
 										<li><a
 											href="${pageContext.request.contextPath}/sistema/cursos/consulta.jsp">Consultar
