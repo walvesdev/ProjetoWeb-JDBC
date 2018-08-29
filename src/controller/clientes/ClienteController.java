@@ -127,10 +127,10 @@ public class ClienteController extends HttpServlet {
 
 					if (ClienteDao.pesquisarId(cliente) == null) {
 						ClienteDao.inserir(cliente);
-						request.setAttribute("mensagem", "Cadastro  Efetuado com Sucesso!");
+						request.setAttribute("sucesso", "Cadastro  Efetuado com Sucesso!");
 						request.getRequestDispatcher("/sistema/clientes/cadastro.jsp").forward(request, response);
 					} else {
-						request.setAttribute("mensagem", "Erro ao cadastrar Cliente, CPF Já cadastrado!");
+						request.setAttribute("erro", "Erro ao cadastrar Cliente, CPF Já cadastrado!");
 						request.getRequestDispatcher("/sistema/clientes/cadastro.jsp").forward(request, response);
 					}
 				} catch (Exception e) {
@@ -138,7 +138,7 @@ public class ClienteController extends HttpServlet {
 				}
 
 			} else {
-				session.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+				session.setAttribute("erro", "Todos os campos precisam ser preenchidos corretamente!");
 				request.getRequestDispatcher("/sistema/clientes/cadastro.jsp").forward(request, response);
 			}
 
@@ -148,23 +148,32 @@ public class ClienteController extends HttpServlet {
 
 		case "consulta":
 
+			cpf = Long.parseLong(cpfmascara);
+			
+			cliente = new Cliente();
 			cliente.setCpf(cpf);
 
-			if ((cpf != null)) {
+			if (cpf != null) {
 				try {
-					Cliente cli = new Cliente();
+					if (ClienteDao.pesquisarId(cliente) != null) {
+						Cliente cli = new Cliente();
 
-					cli = ClienteDao.pesquisarId(cliente);
-					request.setAttribute("cliente", cli);
-					request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
+						cli = ClienteDao.pesquisarId(cliente);
+						request.setAttribute("cliente", cli);
+						request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
 
+					}else {
+						request.setAttribute("erro", "Erro ao buscar Cliente, CPF não encontrado");
+						request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
+					}
+					
 				} catch (Exception e) {
-					request.setAttribute("mensagem", "Erro ao buscar Cliente" + e);
+					request.setAttribute("erro", "Erro ao buscar Cliente" + e);
 					request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
 
 				}
 			} else {
-				request.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+				request.setAttribute("erro", "Todos os campos precisam ser preenchidos corretamente!");
 				request.getRequestDispatcher("/sistema/clientes/consulta.jsp").forward(request, response);
 
 			}
@@ -187,11 +196,11 @@ public class ClienteController extends HttpServlet {
 
 					if (ClienteDao.pesquisarId(cliente) != null) {
 						ClienteDao.excluir(cliente);
-						request.setAttribute("mensagem", "Cliente excluido com sucesso!");
+						request.setAttribute("sucesso", "Cliente excluido com sucesso!");
 						request.getRequestDispatcher("/sistema/clientes/exclusao.jsp").forward(request, response);
 
 					} else {
-						request.setAttribute("mensagem", "Erro ao excluir Cliente, CPF não encontrado!");
+						request.setAttribute("erro", "Erro ao excluir Cliente, CPF não encontrado!");
 						request.getRequestDispatcher("/sistema/clientes/exclusao.jsp").forward(request, response);
 					}
 
@@ -199,7 +208,7 @@ public class ClienteController extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else {
-				request.setAttribute("mensagem", "CPF precisa ser preenchido corretamente!");
+				request.setAttribute("erro", "CPF precisa ser preenchido corretamente!");
 				request.getRequestDispatcher("/sistema/clientes/exclusao.jsp").forward(request, response);
 
 			}
@@ -245,11 +254,11 @@ public class ClienteController extends HttpServlet {
 
 					if (ClienteDao.pesquisarId(cliente) != null) {
 						ClienteDao.alterar(cliente);
-						request.setAttribute("mensagem", "Cliente alterado com sucesso!");
+						request.setAttribute("sucesso", "Cliente alterado com sucesso!");
 						request.getRequestDispatcher("/sistema/clientes/alteracao.jsp").forward(request, response);
 
 					} else {
-						request.setAttribute("mensagem", "Erro ao alterar Cliente, Cliente não encontrado!");
+						request.setAttribute("erro", "Erro ao alterar Cliente, Cliente não encontrado!");
 						request.getRequestDispatcher("/sistema/clientes/alteracao.jsp").forward(request, response);
 					}
 
@@ -257,7 +266,7 @@ public class ClienteController extends HttpServlet {
 					e.printStackTrace();
 				}
 			} else {
-				request.setAttribute("mensagem", "Todos os campos precisam ser preenchidos corretamente!");
+				request.setAttribute("erro", "Todos os campos precisam ser preenchidos corretamente!");
 				request.getRequestDispatcher("/sistema/clientes/alteracao.jsp").forward(request, response);
 
 			}

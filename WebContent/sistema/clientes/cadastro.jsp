@@ -1,3 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/sistema/template/header.jsp" />
 
 	<div class="section">
@@ -46,7 +49,17 @@
 						</div>
 						<input type="hidden" name="action" value="inserir">
 						<button type="submit" class="btn btn-danger">Cadastrar</button><br><br>
-						<p class="msgs">${mensagem} </p>
+						<c:choose>
+						<c:when test="${erro != null}">
+							<div class="alert alert-danger" role="alert">${erro}</div>
+						</c:when>
+						<c:when test="${sucesso != null}">
+							<div class="alert alert-success" role="alert">${sucesso}</div>
+						</c:when>
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
 
 					</form>
 				</div>

@@ -40,8 +40,10 @@ public class LoginFilter implements Filter {
 
 			
 		}else {
-			session.setAttribute("msg_erro_login", "Usuário não autenticado, identifique-se por favor!");
-			response.sendRedirect(request.getContextPath() + "/login.jsp");
+			request.setAttribute("erro", "Usuário não autenticado, identifique-se por favor!");
+			request.getRequestDispatcher("/login.jsp").forward(request, response);
+
+			//response.sendRedirect(request.getContextPath() + "/login.jsp");
 		}
 		
 		

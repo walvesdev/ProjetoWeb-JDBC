@@ -7,7 +7,8 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h3 class="tt_menu">&gt;&gt; CLIENTES - CONSULTAR CLIENTE &lt;&lt;</h3>
+				<h3 class="tt_menu">&gt;&gt; CLIENTES - CONSULTAR CLIENTE
+					&lt;&lt;</h3>
 			</div>
 		</div>
 		<div class="row">
@@ -28,10 +29,7 @@
 					</div>
 					<input type="hidden" name="action" value="consulta">
 					<button type="submit" class="btn btn-danger">Consultar</button>
-					<br>
-					<br>
-					<br>
-					<br>
+					<br> <br> <br> <br>
 					<table width="100%" border="1">
 						<tr>
 							<td align="center"><strong>Nome</strong></td>
@@ -46,20 +44,43 @@
 							<c:otherwise>
 
 								<tr>
-									
+									<c:url var="editarContatoUrl"
+										value="/ClienteController?action=clienteAlterar">
+										<c:param name="cpf">${cliente.cpf}</c:param>
+										<c:param name="nome">${cliente.nome}</c:param>
+										<c:param name="email">${cliente.email}</c:param>
+									</c:url>
+
+									<c:url var="excluirContatoUrl"
+										value="/ClienteController?action=clienteDeletar">
+										<c:param name="cpf">${cliente.cpf}</c:param>
+									</c:url>
 
 
 									<td align="center">${cliente.nome}</td>
 									<td align="center">${cliente.cpf}</td>
 									<td align="center">${cliente.email}</td>
+									<td align="center"><A href="${excluirContatoUrl}">Excluir</A></td>
+									<td align="center"><A href="${editarContatoUrl}">Editar</A></td>
 								</tr>
 
 							</c:otherwise>
 						</c:choose>
 
 					</table>
-				</form><br>
-				<p class="msgs">${mensagem} </p>
+				</form>
+				<br>
+				<c:choose>
+						<c:when test="${erro != null}">
+							<div class="alert alert-danger" role="alert">${erro}</div>
+						</c:when>
+						<c:when test="${sucesso != null}">
+							<div class="alert alert-success" role="alert">${sucesso}</div>
+						</c:when>
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
 			</div>
 		</div>
 	</div>

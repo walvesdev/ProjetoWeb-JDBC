@@ -56,7 +56,7 @@
 								<c:param name="cpf">${c.cpf}</c:param>
 							</c:url>
 
-							<td align="center"><A href="${editarContatoUrl}">${c.nome}</A></td>
+							<td align="center">${c.nome}</td>
 							<td align="center">${c.cpf}</td>
 							<td align="center">${c.email}</td>
 							<td align="center"><A href="${excluirContatoUrl}">Excluir</A></td>
@@ -68,7 +68,17 @@
 
 		</table>
 				</form>
-				<p class="msgs">${mensagem} </p>
+				<c:choose>
+						<c:when test="${erro != null}">
+							<div class="alert alert-danger" role="alert">${erro}</div>
+						</c:when>
+						<c:when test="${sucesso != null}">
+							<div class="alert alert-success" role="alert">${sucesso}</div>
+						</c:when>
+						<c:otherwise>
+
+						</c:otherwise>
+					</c:choose>
 			</div>
 		</div>
 	</div>

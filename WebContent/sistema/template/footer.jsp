@@ -3,7 +3,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-12 text-center" style="top: 13px; color: #fff;">Sistema
-						de Gerenciamento de Cursos</div>
+						de Gestão de Cursos</div>
 				</div>
 			</div>
 		</div>

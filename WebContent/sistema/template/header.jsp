@@ -8,7 +8,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- As 3 meta tags acima *devem* vir em primeiro lugar dentro do `head`; qualquer outro conteúdo deve vir *após* essas tags -->
-<title>Sistema de Gerenciamento de Cursos</title>
+<title>Sistema de Gestão de Cursos</title>
 <link href="${pageContext.request.contextPath}/sistema/lib/css/bootstrap.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/sistema/lib/css/padrao.css" rel="stylesheet">
 </head>
@@ -18,7 +18,7 @@
 			<div class="container">
 				<div class="row text-center">
 					<div class="col-md-12 text-center">
-						<h1 class="text-center">Sistema de Gerenciamento de Cursos</h1>
+						<h1 class="text-center">Sistema de Gestão de Cursos</h1>
 						<p class="text-right">Usuario: ${usuario.nome}</p>
 						<p class="text-right">Permissão: ${usuario.grupo}</p>
 						<p class="text-right p1">
@@ -136,7 +136,7 @@
 									<ul class="dropdown-menu">
 										<li><a
 											href="${pageContext.request.contextPath}/sistema/clientes/cadastro.jsp">Cadastrar</a></li>
-										<li><a href="/ProjetoWeb/ListarClientes">Consultar
+										<li><a href="${pageContext.request.contextPath}/ClienteController?action=consultartodos">Consultar
 												Todos</a></li>
 										<li><a
 											href="${pageContext.request.contextPath}/sistema/clientes/consulta.jsp">Consultar
@@ -189,10 +189,11 @@
 											href="${pageContext.request.contextPath}/sistema/pagamentoss/exclusao.jsp">Excluir
 												um Pagamento</a></li>
 									</ul></li>
-							</ul>
+								</ul>
 						</div>
 					</div>
-				</nav>						
+
+				</nav>			
 			</c:otherwise>
 		</c:choose>
 

@@ -1,3 +1,7 @@
+<%@page import="model.Cliente"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="/sistema/template/header.jsp" />
 <div class="section">
 	<div class="container">
@@ -17,9 +21,8 @@
 								CPF:</label>
 						</div>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="cpf" value="${cliente.cpf}"
-								id="inputEmail3" placeholder="cpf"
-								
+							<input type="text" class="form-control" name="cpf"
+								value="${cliente.cpf}" id="inputEmail3" placeholder="cpf"
 								title="Digite um CPF no formato: xxx.xxx.xxx-xx" required>
 						</div>
 					</div>
@@ -30,7 +33,8 @@
 						</div>
 						<div class="col-sm-10">
 							<input type="text" name="nome" class="form-control"
-								id="inputNome" placeholder="Nome" value="${cliente.nome}"required>
+								id="inputNome" placeholder="Nome" value="${cliente.nome}"
+								required>
 						</div>
 					</div>
 					<div class="form-group">
@@ -39,27 +43,29 @@
 								EMAIL:</label>
 						</div>
 						<div class="col-sm-10">
-							<input type="email" name="email" class="form-control" value="${cliente.email}"
-								id="inputEMAIL" placeholder="E-mail">
+							<input type="email" name="email" class="form-control"
+								value="${cliente.email}" id="inputEMAIL" placeholder="E-mail">
 						</div>
 					</div>
 					<input type="hidden" name="action" value="alterar">
 					<button type="submit" class="btn btn-danger">Alterar</button>
 				</form>
 				<br>
-				<p class="msgs">${mensagem}</p>
+				<c:choose>
+					<c:when test="${erro != null}">
+						<div class="alert alert-danger" role="alert">${erro}</div>
+					</c:when>
+					<c:when test="${sucesso != null}">
+						<div class="alert alert-success" role="alert">${sucesso}</div>
+					</c:when>
+					<c:otherwise>
+
+					</c:otherwise>
+				</c:choose>
 				<br>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="section">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12 text-center corrigir">
-				<a class="btn btn-default" href="javascript:window.history.go(-1)">Voltar</a>
-			</div>
-		</div>
-	</div>
-</div>
+
 <jsp:include page="/sistema/template/footer.jsp" />
