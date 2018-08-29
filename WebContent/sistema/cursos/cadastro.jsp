@@ -9,21 +9,20 @@
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<form class="form-horizontal" role="form" method="post" action="/ProjetoWeb/Controlador">
+					<form class="form-horizontal" role="form" method="post" action="/ProjetoWeb/CursosController">
 						<div class="form-group">
 							<div class="col-sm-2">
-								<label for="inputCURSO" class="control-label">Informar o
+								<label for="inputCURSO" class="control-label">Codigo do
 									CURSO:</label>
 							</div>
 							<div class="col-sm-10">
-								<input type="number" name="cdcurso" class="form-control"
+								<input type="number" name="codcurso" class="form-control"
 									id="inputCURSO" placeholder="Curso" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="col-sm-2">
-								<label for="inputNome" class="control-label">Informar o
-									NOME:</label>
+								<label for="inputNome" class="control-label">NOME:</label>
 							</div>
 							<div class="col-sm-10">
 								<input type="text" name="nome" class="form-control"
@@ -32,8 +31,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-2">
-								<label for="inputVALOR" class="control-label">Informar o
-									VALOR:</label>
+								<label for="inputVALOR" class="control-label">VALOR:</label>
 							</div>
 							<div class="col-sm-10">
 								<input type="number" name="valor" class="form-control"
@@ -42,8 +40,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-2">
-								<label for="inputSITE" class="control-label">Informar o
-									SITE:</label>
+								<label for="inputSITE" class="control-label">SITE:</label>
 							</div>
 							<div class="col-sm-10">
 								<input type="url" name="site" class="form-control" id="inputSITE"
