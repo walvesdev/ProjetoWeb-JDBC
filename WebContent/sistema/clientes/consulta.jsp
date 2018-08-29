@@ -7,14 +7,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h3 class="tt_menu">&gt;&gt; CLIENTES - CONSULTAR UM NOVO
-					CLIENTE &lt;&lt;</h3>
+				<h3 class="tt_menu">&gt;&gt; CLIENTES - CONSULTAR CLIENTE &lt;&lt;</h3>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<form class="form-horizontal" role="form" method="post"
-					action="/ProjetoWeb/ClienteController">
+					action="${pageContext.request.contextPath}/ClienteController">
 					<div class="form-group">
 						<div class="col-sm-2">
 							<label for="inputEmail3" class="control-label">Informar o
@@ -59,7 +58,7 @@
 						</c:choose>
 
 					</table>
-				</form>
+				</form><br>
 				<p class="msgs">${mensagem} </p>
 			</div>
 		</div>

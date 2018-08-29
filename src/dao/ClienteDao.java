@@ -32,14 +32,14 @@ public class ClienteDao {
 		}
 	}
 
-	public static Cliente pesquisarId(Cliente idCliente) throws SQLException {
+	public static Cliente pesquisarId(Cliente cpfCliente) throws SQLException {
 
 		Cliente cliente = null;
 		String consulta = "select * from clientes where cpf = ?";
 
 		try (Connection connection = ConectarBD.Conectar();
 				PreparedStatement stmt = connection.prepareStatement(consulta);) {
-			stmt.setLong(1, idCliente.getCpf());
+			stmt.setLong(1, cpfCliente.getCpf());
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
@@ -81,7 +81,7 @@ public class ClienteDao {
 	}
 
 	public static void excluir(Cliente cliente) throws SQLException {
-		String consulta = "delete * from clientes where cpf = ?;";
+		String consulta = "delete from clientes where cpf = ?;";
 
 		try (Connection connection = ConectarBD.Conectar();
 				PreparedStatement stmt = connection.prepareStatement(consulta);) {
@@ -92,6 +92,23 @@ public class ClienteDao {
 			
 			}
 		}
+	public static void alterar(Cliente cliente) throws SQLException {
+		
+		String consulta = "update clientes set nome = ?, cpf = ?, email = ? where cpf = ?;";
+			
+
+		try (Connection connection = ConectarBD.Conectar();
+				PreparedStatement stmt = connection.prepareStatement(consulta);) {
+
+			stmt.setString(1, cliente.getNome());
+			stmt.setLong(2, cliente.getCpf());
+			stmt.setString(3, cliente.getEmail());
+			stmt.setLong(4, cliente.getCpf());
+			stmt.execute();
+
+			
+			}
+	}
 
 	}
 

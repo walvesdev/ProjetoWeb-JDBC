@@ -17,8 +17,8 @@
 								CPF a ser EXCLUÍDO:</label>
 						</div>
 						<div class="col-sm-9">
-							<input type="text" name="cpf" class="form-control" id="inputCPF"
-								placeholder="CPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"
+							<input type="text" name="cpf" class="form-control" id="inputCPF" value="${cliente.cpf}"
+								placeholder="CPF"
 								title="Digite um CPF no formato: xxx.xxx.xxx-xx" required>
 						</div>
 					</div>
@@ -26,7 +26,7 @@
 
 					<button type="submit" class="btn btn-danger">Excluir</button>
 
-				</form>
+				</form><br>
 				<p class="msgs">${mensagem}</p>
 				<br>
 
