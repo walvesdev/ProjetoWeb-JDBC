@@ -21,8 +21,7 @@
 								CURSO:</label>
 						</div>
 						<div class="col-sm-10">
-							<input type="number" name="codcurso" class="form-control"
-								id="inputEmail3" placeholder="CURSO" required>
+							<input type="number" name="codcurso" class="form-control" id="inputEmail3" placeholder="CURSO" required>
 						</div>
 					</div>
 					<input type="hidden" name="action" value="consulta">

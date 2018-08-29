@@ -46,6 +46,7 @@ public class CursoDao {
 			while (rs.next()) {
 				curso = new Curso();
 				curso.setId(rs.getInt("id"));
+				curso.setCodCurso(rs.getInt("codcurso"));
 				curso.setNome(rs.getString("nome"));
 				curso.setSite(rs.getString("site"));
 				curso.setValor(rs.getDouble("valor"));
